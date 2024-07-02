@@ -178,7 +178,7 @@
   <div id="counter">Cats: 0</div>
   <div id="cpsc-counter">CPS: 0 CPC: 1</div>
 </div>
-<img id="cat" src="Cat.png" alt="Cute cat" draggable="false">
+<img id="cat" src="cat.png" alt="Cute cat" draggable="false">
 
   <button id="rebirth-button">Rebirth</button>
   <button id="shop-button">Open Shop</button>
@@ -188,117 +188,137 @@
       <h3>Whisker Widgets</h3>
       <p id="whiskerWidgets-price">Price: 50 clicks</p>
       <p id="whiskerWidgets-cps">+1 CPS</p>
+      <p id="whiskerWidgets-cpc">+0 CPC</p>
       <button onclick="buyUpgrade('whiskerWidgets')">Buy</button>
     </div>
     <div id="purrfectProcessor" class="shop-item">
       <h3>Purrfect Processor</h3>
       <p id="purrfectProcessor-price">Price: 150 clicks</p>
       <p id="purrfectProcessor-cps">+2 CPS</p>
+      <p id="purrfectProcessor-cpc">+0 CPC</p>
       <button onclick="buyUpgrade('purrfectProcessor')">Buy</button>
     </div>
     <div id="clawCapacitor" class="shop-item">
       <h3>Claw Capacitor</h3>
       <p id="clawCapacitor-price">Price: 300 clicks</p>
       <p id="clawCapacitor-cps">+4 CPS</p>
+      <p id="clawCapacitor-cpc">+1 CPC</p>
       <button onclick="buyUpgrade('clawCapacitor')">Buy</button>
     </div>
     <div id="furballFusionCore" class="shop-item">
       <h3>Furball Fusion Core</h3>
       <p id="furballFusionCore-price">Price: 500 clicks</p>
       <p id="furballFusionCore-cps">+8 CPS</p>
+      <p id="furballFusionCore-cpc">+4 CPC</p>
       <button onclick="buyUpgrade('furballFusionCore')">Buy</button>
     </div>
     <div id="meowMixer" class="shop-item">
       <h3>Meow Mixer</h3>
       <p id="meowMixer-price">Price: 1000 clicks</p>
       <p id="meowMixer-cps">+16 CPS</p>
+      <p id="meowMixer-cpc">+8 CPC</p>
       <button onclick="buyUpgrade('meowMixer')">Buy</button>
     </div>
     <div id="kittyCollider" class="shop-item">
       <h3>Kitty Collider</h3>
       <p id="kittyCollider-price">Price: 2000 clicks</p>
       <p id="kittyCollider-cps">+32 CPS</p>
+      <p id="kittyCollider-cpc">+16 CPC</p>
       <button onclick="buyUpgrade('kittyCollider')">Buy</button>
       <div id="tailTuner" class="shop-item">
         <h3>Tail Tuner</h3>
         <p id="tailTuner-price">Price: 4000 clicks</p>
         <p id="tailTuner-cps">+64 CPS</p>
+        <p id="tailTuner-cpc">+32 CPC</p>
         <button onclick="buyUpgrade('tailTuner')">Buy</button>
       </div>
       <div id="whiskerWarpDrive" class="shop-item">
         <h3>Whisker Warp Drive</h3>
         <p id="whiskerWarpDrive-price">Price: 8000 clicks</p>
         <p id="whiskerWarpDrive-cps">+128 CPS</p>
+        <p id="whiskerWarpDrive-cpc">+64 CPC</p>
         <button onclick="buyUpgrade('whiskerWarpDrive')">Buy</button>
         <div id="felineFlicker" class="shop-item">
             <h3>Feline Flicker</h3>
             <p id="felineFlicker-price">Price: 16000 clicks</p>
             <p id="felineFlicker-cps">+256 CPS</p>
+            <p id="felineFlicker-cpc">+128 CPC</p>
             <button onclick="buyUpgrade('felineFlicker')">Buy</button>
           </div>
           <div id="purringPowerPlant" class="shop-item">
             <h3>Purring Power Plant</h3>
             <p id="purringPowerPlant-price">Price: 32000 clicks</p>
             <p id="purringPowerPlant-cps">+512 CPS</p>
+            <p id="purringPowerPlant-cpc">+256 CPC</p>
             <button onclick="buyUpgrade('purringPowerPlant')">Buy</button>
           </div>
           <div id="catnipConverter" class="shop-item">
             <h3>Catnip Converter</h3>
             <p id="catnipConverter-price">Price: 64000 clicks</p>
             <p id="catnipConverter-cps">+1024 CPS</p>
+            <p id="catnipConverter-cpc">+512 CPC</p>
             <button onclick="buyUpgrade('catnipConverter')">Buy</button>
           </div>
           <div id="kittyKraken" class="shop-item">
             <h3>Kitty Kraken</h3>
             <p id="kittyKraken-price">Price: 128000 clicks</p>
             <p id="kittyKraken-cps">+2048 CPS</p>
+            <p id="kittyKraken-cpc">+1024 CPC</p>
             <button onclick="buyUpgrade('kittyKraken')">Buy</button>
           </div>
           <div id="meowtoniumReactor" class="shop-item">
             <h3>Meowtonium Reactor</h3>
             <p id="meowtoniumReactor-price">Price: 256000 clicks</p>
             <p id="meowtoniumReactor-cps">+4096 CPS</p>
+            <p id="meowtoniumReactor-cpc">+2048 CPC</p>
             <button onclick="buyUpgrade('meowtoniumReactor')">Buy</button>
           </div>
           <div id="quantumPurr" class="shop-item">
             <h3>Quantum Purr</h3>
             <p id="quantumPurr-price">Price: 512000 clicks</p>
             <p id="quantumPurr-cps">+8192 CPS</p>
+            <p id="quantumPurr-cpc">+4096 CPC</p>
             <button onclick="buyUpgrade('quantumPurr')">Buy</button>
             <div id="cosmicClaws" class="shop-item">
                 <h3>Cosmic Claws</h3>
                 <p id="cosmicClaws-price">Price: 1024000 clicks</p>
                 <p id="cosmicClaws-cps">+16384 CPS</p>
+                <p id="cosmicClaws-cpc">+8192 CPC</p>
                 <button onclick="buyUpgrade('cosmicClaws')">Buy</button>
               </div>
               <div id="nebulaNip" class="shop-item">
                 <h3>Nebula Nip</h3>
                 <p id="nebulaNip-price">Price: 2048000 clicks</p>
                 <p id="nebulaNip-cps">+32768 CPS</p>
+                <p id="nebulaNip-cpc">+16384 CPC</p>
                 <button onclick="buyUpgrade('nebulaNip')">Buy</button>
               </div>
               <div id="galacticGroomer" class="shop-item">
                 <h3>Galactic Groomer</h3>
                 <p id="galacticGroomer-price">Price: 4096000 clicks</p>
                 <p id="galacticGroomer-cps">+65536 CPS</p>
+                <p id="galacticGroomer-cpc">+32768 CPC</p>
                 <button onclick="buyUpgrade('galacticGroomer')">Buy</button>
               </div>
               <div id="starlightScratcher" class="shop-item">
                 <h3>Starlight Scratcher</h3>
                 <p id="starlightScratcher-price">Price: 8192000 clicks</p>
                 <p id="starlightScratcher-cps">+131072 CPS</p>
+                <p id="starlightScratcher-cpc">+65536 CPC</p>
                 <button onclick="buyUpgrade('starlightScratcher')">Buy</button>
               </div>
               <div id="cometCuddler" class="shop-item">
                 <h3>Comet Cuddler</h3>
                 <p id="cometCuddler-price">Price: 16384000 clicks</p>
                 <p id="cometCuddler-cps">+262144 CPS</p>
+                <p id="cometCuddler-cpc">+131072 CPC</p>
                 <button onclick="buyUpgrade('cometCuddler')">Buy</button>
               </div>
               <div id="universalPurr" class="shop-item">
                 <h3>Universal Purr</h3>
                 <p id="universalPurr-price">Price: 32768000 clicks</p>
                 <p id="universalPurr-cps">+524288 CPS</p>
+                <p id="universalPurr-cpc">+262144 CPC</p>
                 <button onclick="buyUpgrade('universalPurr')">Buy</button>
               </div>
               
@@ -315,6 +335,7 @@
 
 
     let count = 0;
+    var cpc = 1;
     function updatetitle() {
     document.title = Math.round(count) + " Cats - Cat Clicker";
     };
@@ -324,7 +345,7 @@
   }, 1); 
 
     let cps = 0;
-    let cpc = 1;
+
     const cat = document.getElementById('cat');
 cat.addEventListener('click', function() {
 const audio = document.getElementById('music');
@@ -442,6 +463,7 @@ document.getElementById('rebirth-button').textContent = `Rebirth ${formatNumber(
       if (count >= upgrades[upgrade].cost && !upgrades[upgrade].purchased) {
         count -= upgrades[upgrade].cost;
         cps += upgrades[upgrade].cps;
+        cpc += upgrades[upgrade].cpc;
         counter.textContent = count;
         updateCpsDisplay(); // Update the CPS display
         // Increase the cost for the next purchase
@@ -552,6 +574,7 @@ function saveGame() {
   const gameState = {
     count: count,
     cps: cps,
+    cpc: cpc,
     rebirthMultiplier: rebirthMultiplier,
     rebirthPrice: rebirthPrice
   };
@@ -570,19 +593,15 @@ function loadGame() {
     // Restore your game state variables from the gameState object
     count = gameState.count;
     cps = gameState.cps;
+    cpc = gameState.cpc,
     rebirthMultiplier = gameState.rebirthMultiplier;
     rebirthPrice = gameState.rebirthPrice;
     console.log('Game loaded successfully.');
-    // Update your game with the loaded state
-    // ...
+  
   } else {
     console.log('No saved game found.');
   }
 }
-
-// Example usage:
-// Call saveGame when you want to save the game, e.g., on a button click or at certain intervals
-// Call loadGame when the game starts to load any saved state
 
 window.onload = loadGame;
 
