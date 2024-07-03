@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cat Clicker</title>
-<link type="images" rel="shortcut icon" href="Cat.png">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link type="images" rel="shortcut icon" href="Cat.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playwrite+US+Modern:wght@100..400&display=swap" rel="stylesheet">
@@ -73,7 +73,7 @@
    }
  }
  
- #shop-button, #rebirth-button {
+ #shop-button {
    background-color: #4CAF50;
    color: white;
    padding: 15px 30px;
@@ -81,16 +81,31 @@
    border-radius: 5px;
    cursor: pointer;
    font-size: 1.2em;
+   bottom: 5px;
+   position: relative;
+   position: fixed !important;
+   left: 550px;
+   width: 450px;
+  }
+  #rebirth-button {
+   background-color: #4CAF50;
+   color: white;
+   padding: 15px 30px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 1.2em;
+   bottom: 5px;
    position: fixed;
-   bottom: 10px;
- }
+  }
+ 
  
  #shop-button:hover, #rebirth-button:hover {
    background-color: #45a049;
  }
  
  #rebirth-button {
-   right: 10px;
+   right: 40px;
  }
  
  #shop {
@@ -165,6 +180,134 @@
   background-color: #007B9A;
 }
 
+#close-shop {
+  font-size: 1.5em;
+  color: #333;
+  background-color: #f8f8f8;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#close-shop:hover {
+  color: #f8f8f8;
+  background-color: #333;
+  border-color: #333;
+}
+
+#shop-button.new-items-indicator {
+  position: relative;
+}
+
+#shop-button.new-items-indicator::after {
+  content: 'New';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 50%;
+  opacity: 0; /* Start with the element invisible */
+  animation: fadeinout 4s linear forwards; /* Apply the animation */
+}
+
+/* Define the keyframes for the fade-in and fade-out effect */
+@keyframes fadeinout {
+  0%, 100% { opacity: 0; } /* At the start and end, the element is invisible */
+  50% { opacity: 1; } /* Halfway through the animation, the element is fully visible */
+}
+/* Side Quest Panel Styles */
+#side-quest-panel {
+  position: fixed;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 250px;
+  background-color: #f3f3f3;
+  border: 1px solid #d3d3d3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
+/* Side Quest List Styles */
+#quest-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto; /* Enable scrolling for long lists */
+  max-height: 300px; /* Set a max height */
+}
+
+/* Side Quest Item Styles */
+#quest-list li {
+  background-color: #ffffff;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#quest-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Completed Quest Styles */
+#quest-list li.completed {
+  background-color: #e7ffe7;
+  text-decoration: line-through;
+  color: #6b8e6b;
+}
+
+/* Quest Title Styles */
+.quest-title {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+/* Quest Description Styles */
+.quest-description {
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Quest Reward Styles */
+.quest-reward {
+  font-size: 0.9em;
+  color: #2e8b57;
+  font-weight: bold;
+}
+
+/* Styles for Webkit browsers */
+#quest-list::-webkit-scrollbar {
+  width: 12px; /* Width of the vertical scrollbar */
+}
+
+#quest-list::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Color of the scrollbar track */
+}
+
+#quest-list::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 6px; /* Rounded corners of the scrollbar thumb */
+  border: 3px solid #f0f0f0; /* Creates padding around the scrollbar thumb */
+}
+
+/* Styles for Firefox */
+#quest-list {
+  scrollbar-width: thin; /* 'auto' or 'thin' */
+  scrollbar-color: #888 #f0f0f0; /* Thumb and track color */
+}
 
 </style>
 </head>
@@ -186,139 +329,159 @@
     <button id="close-shop">X</button>
     <div id="whiskerWidgets" class="shop-item">
       <h3>Whisker Widgets</h3>
-      <p id="whiskerWidgets-price">Price: 50 clicks</p>
-      <p id="whiskerWidgets-cps">+1 CPS</p>
-      <p id="whiskerWidgets-cpc">+0 CPC</p>
+      <p id="whiskerWidgets-price">Price: ???</p>
+      <p id="whiskerWidgets-cps">+??? CPS</p>
+      <p id="whiskerWidgets-cpc">+??? CPC</p>
+      <p id="whiskerWidgets-purchases">Purchased: 0</p>
       <button onclick="buyUpgrade('whiskerWidgets')">Buy</button>
     </div>
     <div id="purrfectProcessor" class="shop-item">
       <h3>Purrfect Processor</h3>
-      <p id="purrfectProcessor-price">Price: 150 clicks</p>
-      <p id="purrfectProcessor-cps">+2 CPS</p>
-      <p id="purrfectProcessor-cpc">+0 CPC</p>
+      <p id="purrfectProcessor-price">Price: ???</p>
+      <p id="purrfectProcessor-cps">+??? CPS</p>
+      <p id="purrfectProcessor-cpc">+??? CPC</p>
+      <p id="purrfectProcessor-purchases">Purchased: 0</p>
       <button onclick="buyUpgrade('purrfectProcessor')">Buy</button>
     </div>
     <div id="clawCapacitor" class="shop-item">
       <h3>Claw Capacitor</h3>
-      <p id="clawCapacitor-price">Price: 300 clicks</p>
-      <p id="clawCapacitor-cps">+4 CPS</p>
-      <p id="clawCapacitor-cpc">+1 CPC</p>
+      <p id="clawCapacitor-price">Price: ???</p>
+      <p id="clawCapacitor-cps">+??? CPS</p>
+      <p id="clawCapacitor-cpc">+??? CPC</p>
+      <p id="clawCapacitor-purchases">Purchased: 0</p>
       <button onclick="buyUpgrade('clawCapacitor')">Buy</button>
     </div>
     <div id="furballFusionCore" class="shop-item">
       <h3>Furball Fusion Core</h3>
-      <p id="furballFusionCore-price">Price: 500 clicks</p>
-      <p id="furballFusionCore-cps">+8 CPS</p>
-      <p id="furballFusionCore-cpc">+4 CPC</p>
+      <p id="furballFusionCore-price">Price: ???</p>
+      <p id="furballFusionCore-cps">+??? CPS</p>
+      <p id="furballFusionCore-cpc">+??? CPC</p>
+      <p id="furballFusionCore-purchases">Purchased: 0</p>
       <button onclick="buyUpgrade('furballFusionCore')">Buy</button>
     </div>
     <div id="meowMixer" class="shop-item">
       <h3>Meow Mixer</h3>
-      <p id="meowMixer-price">Price: 1000 clicks</p>
-      <p id="meowMixer-cps">+16 CPS</p>
-      <p id="meowMixer-cpc">+8 CPC</p>
+      <p id="meowMixer-price">Price: ???</p>
+      <p id="meowMixer-cps">+??? CPS</p>
+      <p id="meowMixer-cpc">+??? CPC</p>
+      <p id="meowMixer-purchases">Purchased: 0</p>
       <button onclick="buyUpgrade('meowMixer')">Buy</button>
     </div>
     <div id="kittyCollider" class="shop-item">
       <h3>Kitty Collider</h3>
-      <p id="kittyCollider-price">Price: 2000 clicks</p>
-      <p id="kittyCollider-cps">+32 CPS</p>
-      <p id="kittyCollider-cpc">+16 CPC</p>
+      <p id="kittyCollider-price">Price: ???</p>
+      <p id="kittyCollider-cps">+??? CPS</p>
+      <p id="kittyCollider-cpc">+??? CPC</p>
+      <p id="kittyCollider-purchases">Purchased: 0</p>
       <button onclick="buyUpgrade('kittyCollider')">Buy</button>
       <div id="tailTuner" class="shop-item">
         <h3>Tail Tuner</h3>
-        <p id="tailTuner-price">Price: 4000 clicks</p>
-        <p id="tailTuner-cps">+64 CPS</p>
-        <p id="tailTuner-cpc">+32 CPC</p>
+        <p id="tailTuner-price">Price: ???</p>
+        <p id="tailTuner-cps">+??? CPS</p>
+        <p id="tailTuner-cpc">+??? CPC</p>
+        <p id="tailTuner-purchases">Purchased: 0</p>
         <button onclick="buyUpgrade('tailTuner')">Buy</button>
       </div>
       <div id="whiskerWarpDrive" class="shop-item">
         <h3>Whisker Warp Drive</h3>
-        <p id="whiskerWarpDrive-price">Price: 8000 clicks</p>
-        <p id="whiskerWarpDrive-cps">+128 CPS</p>
-        <p id="whiskerWarpDrive-cpc">+64 CPC</p>
+        <p id="whiskerWarpDrive-price">Price: ???</p>
+        <p id="whiskerWarpDrive-cps">+??? CPS</p>
+        <p id="whiskerWarpDrive-cpc">+??? CPC</p>
+        <p id="whiskerWarpDrive-purchases">Purchased: 0</p>
         <button onclick="buyUpgrade('whiskerWarpDrive')">Buy</button>
         <div id="felineFlicker" class="shop-item">
             <h3>Feline Flicker</h3>
-            <p id="felineFlicker-price">Price: 16000 clicks</p>
-            <p id="felineFlicker-cps">+256 CPS</p>
-            <p id="felineFlicker-cpc">+128 CPC</p>
+            <p id="felineFlicker-price">Price: ???</p>
+            <p id="felineFlicker-cps">+??? CPS</p>
+            <p id="felineFlicker-cpc">+??? CPC</p>
+            <p id="felineFlicker-purchases">Purchased: 0</p>
             <button onclick="buyUpgrade('felineFlicker')">Buy</button>
           </div>
           <div id="purringPowerPlant" class="shop-item">
             <h3>Purring Power Plant</h3>
-            <p id="purringPowerPlant-price">Price: 32000 clicks</p>
-            <p id="purringPowerPlant-cps">+512 CPS</p>
-            <p id="purringPowerPlant-cpc">+256 CPC</p>
+            <p id="purringPowerPlant-price">Price: ???</p>
+            <p id="purringPowerPlant-cps">+??? CPS</p>
+            <p id="purringPowerPlant-cpc">+??? CPC</p>
+            <p id="purringPowerPlant-purchases">Purchased: 0</p>
             <button onclick="buyUpgrade('purringPowerPlant')">Buy</button>
           </div>
           <div id="catnipConverter" class="shop-item">
             <h3>Catnip Converter</h3>
-            <p id="catnipConverter-price">Price: 64000 clicks</p>
-            <p id="catnipConverter-cps">+1024 CPS</p>
-            <p id="catnipConverter-cpc">+512 CPC</p>
+            <p id="catnipConverter-price">Price: ???</p>
+            <p id="catnipConverter-cps">+??? CPS</p>
+            <p id="catnipConverter-cpc">+??? CPC</p>
+            <p id="catnipConverter-purchases">Purchased: 0</p>
             <button onclick="buyUpgrade('catnipConverter')">Buy</button>
           </div>
           <div id="kittyKraken" class="shop-item">
             <h3>Kitty Kraken</h3>
-            <p id="kittyKraken-price">Price: 128000 clicks</p>
-            <p id="kittyKraken-cps">+2048 CPS</p>
-            <p id="kittyKraken-cpc">+1024 CPC</p>
+            <p id="kittyKraken-price">Price: ???</p>
+            <p id="kittyKraken-cps">+??? CPS</p>
+            <p id="kittyKraken-cpc">+??? CPC</p>
+            <p id="kittyKraken-purchases">Purchased: 0</p>
             <button onclick="buyUpgrade('kittyKraken')">Buy</button>
           </div>
           <div id="meowtoniumReactor" class="shop-item">
             <h3>Meowtonium Reactor</h3>
-            <p id="meowtoniumReactor-price">Price: 256000 clicks</p>
-            <p id="meowtoniumReactor-cps">+4096 CPS</p>
-            <p id="meowtoniumReactor-cpc">+2048 CPC</p>
+            <p id="meowtoniumReactor-price">Price: ???</p>
+            <p id="meowtoniumReactor-cps">+??? CPS</p>
+            <p id="meowtoniumReactor-cpc">+??? CPC</p>
+            <p id="meowtoniumReactor-purchases">Purchased: 0</p>
             <button onclick="buyUpgrade('meowtoniumReactor')">Buy</button>
           </div>
           <div id="quantumPurr" class="shop-item">
             <h3>Quantum Purr</h3>
-            <p id="quantumPurr-price">Price: 512000 clicks</p>
-            <p id="quantumPurr-cps">+8192 CPS</p>
-            <p id="quantumPurr-cpc">+4096 CPC</p>
+            <p id="quantumPurr-price">Price: ???</p>
+            <p id="quantumPurr-cps">+??? CPS</p>
+            <p id="quantumPurr-cpc">+??? CPC</p>
+            <p id="quantumPurr-purchases">Purchased: 0</p>
             <button onclick="buyUpgrade('quantumPurr')">Buy</button>
             <div id="cosmicClaws" class="shop-item">
                 <h3>Cosmic Claws</h3>
-                <p id="cosmicClaws-price">Price: 1024000 clicks</p>
-                <p id="cosmicClaws-cps">+16384 CPS</p>
-                <p id="cosmicClaws-cpc">+8192 CPC</p>
+                <p id="cosmicClaws-price">Price: ???</p>
+                <p id="cosmicClaws-cps">+??? CPS</p>
+                <p id="cosmicClaws-cpc">+??? CPC</p>
+                <p id="cosmicClaws-purchases">Purchased: 0</p>
                 <button onclick="buyUpgrade('cosmicClaws')">Buy</button>
               </div>
               <div id="nebulaNip" class="shop-item">
                 <h3>Nebula Nip</h3>
-                <p id="nebulaNip-price">Price: 2048000 clicks</p>
-                <p id="nebulaNip-cps">+32768 CPS</p>
-                <p id="nebulaNip-cpc">+16384 CPC</p>
+                <p id="nebulaNip-price">Price: ???</p>
+                <p id="nebulaNip-cps">+??? CPS</p>
+                <p id="nebulaNip-cpc">+??? CPC</p>
+                <p id="nebulaNip-purchases">Purchased: 0</p>
                 <button onclick="buyUpgrade('nebulaNip')">Buy</button>
               </div>
               <div id="galacticGroomer" class="shop-item">
                 <h3>Galactic Groomer</h3>
-                <p id="galacticGroomer-price">Price: 4096000 clicks</p>
-                <p id="galacticGroomer-cps">+65536 CPS</p>
-                <p id="galacticGroomer-cpc">+32768 CPC</p>
+                <p id="galacticGroomer-price">Price: ???</p>
+                <p id="galacticGroomer-cps">+??? CPS</p>
+                <p id="galacticGroomer-cpc">+??? CPC</p>
+                <p id="galacticGroomer-purchases">Purchased: 0</p>
                 <button onclick="buyUpgrade('galacticGroomer')">Buy</button>
               </div>
               <div id="starlightScratcher" class="shop-item">
                 <h3>Starlight Scratcher</h3>
-                <p id="starlightScratcher-price">Price: 8192000 clicks</p>
-                <p id="starlightScratcher-cps">+131072 CPS</p>
-                <p id="starlightScratcher-cpc">+65536 CPC</p>
+                <p id="starlightScratcher-price">Price: ???</p>
+                <p id="starlightScratcher-cps">+??? CPS</p>
+                <p id="starlightScratcher-cpc">+??? CPC</p>  
+                <p id="starlightScratcher-purchases">Purchased: 0</p>
                 <button onclick="buyUpgrade('starlightScratcher')">Buy</button>
               </div>
               <div id="cometCuddler" class="shop-item">
                 <h3>Comet Cuddler</h3>
-                <p id="cometCuddler-price">Price: 16384000 clicks</p>
-                <p id="cometCuddler-cps">+262144 CPS</p>
-                <p id="cometCuddler-cpc">+131072 CPC</p>
+                <p id="cometCuddler-price">Price: ???</p>
+                <p id="cometCuddler-cps">+??? CPS</p>
+                <p id="cometCuddler-cpc">+??? CPC</p>
+                <p id="cometCuddler-purchases">Purchased: 0</p>
                 <button onclick="buyUpgrade('cometCuddler')">Buy</button>
               </div>
               <div id="universalPurr" class="shop-item">
                 <h3>Universal Purr</h3>
-                <p id="universalPurr-price">Price: 32768000 clicks</p>
-                <p id="universalPurr-cps">+524288 CPS</p>
-                <p id="universalPurr-cpc">+262144 CPC</p>
+                <p id="universalPurr-price">Price: ???</p>
+                <p id="universalPurr-cps">+??? CPS</p>
+                <p id="universalPurr-cpc">+??? CPC</p>
+                <p id="universalPurr-purchases">Purchased: 0</p>
                 <button onclick="buyUpgrade('universalPurr')">Buy</button>
               </div>
               
@@ -327,15 +490,22 @@
       </div>
     </div>
   </div>
-  
-    <!-- Shop items will be added here -->
   </div>
-  <script>
+
+  <!-- Side Quest Panel HTML -->
+<div id="side-quest-panel">
+  <h3>Side Quests</h3>
+  <ul id="quest-list">
+    <!-- Quest items will be added here dynamically -->
+  </ul>
+</div>
+<script>
  document.getElementById('cat').ondragstart = function() { return false; };
 
 
     let count = 0;
     var cpc = 1;
+    var firstUpgrade = false;
     function updatetitle() {
     document.title = Math.round(count) + " Cats - Cat Clicker";
     };
@@ -363,26 +533,26 @@ audio.play();
     const shopButton = document.getElementById('shop-button');
     const closeShop = document.getElementById('close-shop');
     const upgrades = {
-  whiskerWidgets: { cost: 50, baseCps: 1, cps: 1, cpc: 0 },
-  purrfectProcessor: { cost: 150, baseCps: 2, cps: 2 , cpc: 0},
-  clawCapacitor: { cost: 300, baseCps: 4, cps: 4, cpc: 1},
-  furballFusionCore: { cost: 500, baseCps: 8, cps, cpc: 2},
-  meowMixer: { cost: 1000, baseCps: 16, cps: 16, cpc: 3},
-  kittyCollider: { cost: 2000, baseCps: 32, cps: 32, cpc: 4},
-  tailTuner: { cost: 4000, baseCps: 64, cps: 64, cpc: 5},
-  whiskerWarpDrive: { cost: 8000, baseCps: 128, cps: 128, cpc: 6},
-  felineFlicker: { cost: 16000, baseCps: 256, cps: 256, cpc: 7},
-  purringPowerPlant: { cost: 32000, baseCps: 512, cps: 512 , cpc: 8},
-  catnipConverter: { cost: 64000, baseCps: 1024, cps: 1024, cpc: 9},
-  kittyKraken: { cost: 128000, baseCps: 2048, cps: 2048, cpc: 10},
-  meowtoniumReactor: { cost: 256000, baseCps: 4096, cps: 4096, cpc: 11},
-  quantumPurr: { cost: 512000, baseCps: 8192, cps: 8192, cpc: 12},
-  cosmicClaws: { cost: 1024000, baseCps: 16384, cps: 16384, cpc: 13},
-  nebulaNip: { cost: 2048000, baseCps: 32768, cps: 32768, cpc: 14},
-  galacticGroomer: { cost: 4096000, baseCps: 65536, cps: 65536, cpc: 15},
-  starlightScratcher: { cost: 8192000, baseCps: 131072, cps: 131072, cpc: 16},
-  cometCuddler: { cost: 16384000, baseCps: 262144, cps: 262144, cpc: 17},
-  universalPurr: { cost: 32768000, baseCps: 524288, cps: 524288, cpc: 18}
+  whiskerWidgets: { cost: 50, baseCps: 1, cps: 1, cpc: 0, purchases: 0, unlocked: false },
+  purrfectProcessor: { cost: 150, baseCps: 2, cps: 2 , cpc: 0, purchases: 0, unlocked: false},
+  clawCapacitor: { cost: 300, baseCps: 4, cps: 4, cpc: 1, purchases: 0, unlocked: false},
+  furballFusionCore: { cost: 500, baseCps: 8, cps, cpc: 2, purchases: 0, unlocked: false},
+  meowMixer: { cost: 1000, baseCps: 16, cps: 16, cpc: 3, purchases: 0, unlocked: false},
+  kittyCollider: { cost: 2000, baseCps: 32, cps: 32, cpc: 4, purchases: 0}, unlocked: false,
+  tailTuner: { cost: 4000, baseCps: 64, cps: 64, cpc: 5, purchases: 0, unlocked: false},
+  whiskerWarpDrive: { cost: 8000, baseCps: 128, cps: 128, cpc: 6, purchases: 0, unlocked: false},
+  felineFlicker: { cost: 16000, baseCps: 256, cps: 256, cpc: 7, purchases: 0, unlocked: false},
+  purringPowerPlant: { cost: 32000, baseCps: 512, cps: 512 , cpc: 8, purchases: 0, unlocked: false},
+  catnipConverter: { cost: 64000, baseCps: 1024, cps: 1024, cpc: 9, purchases: 0, unlocked: false},
+  kittyKraken: { cost: 128000, baseCps: 2048, cps: 2048, cpc: 10, purchases: 0, unlocked: false},
+  meowtoniumReactor: { cost: 256000, baseCps: 4096, cps: 4096, cpc: 11, purchases: 0, unlocked: false},
+  quantumPurr: { cost: 512000, baseCps: 8192, cps: 8192, cpc: 12, purchases: 0, unlocked: false},
+  cosmicClaws: { cost: 1024000, baseCps: 16384, cps: 16384, cpc: 13, purchases: 0, unlocked: false},
+  nebulaNip: { cost: 2048000, baseCps: 32768, cps: 32768, cpc: 14, purchases: 0, unlocked: false},
+  galacticGroomer: { cost: 4096000, baseCps: 65536, cps: 65536, cpc: 15, purchases: 0, unlocked: false},
+  starlightScratcher: { cost: 8192000, baseCps: 131072, cps: 131072, cpc: 16, purchases: 0, unlocked: false},
+  cometCuddler: { cost: 16384000, baseCps: 262144, cps: 262144, cpc: 17, purchases: 0, unlocked: false},
+  universalPurr: { cost: 32768000, baseCps: 524288, cps: 524288, cpc: 18, purchases: 0, unlocked: false}
 };
 
 let rebirthMultiplier = 1;
@@ -403,6 +573,7 @@ function buyUpgrade(upgrade) {
     count -= upgrades[upgrade].cost;
     cps += upgrades[upgrade].cps;
     cpc += upgrades[upgrade].cpc;
+    upgrades[upgrade].purchases++;
     counter.textContent = formatNumber(count);
     document.getElementById(upgrade + '-price').textContent = `Price: ${formatNumber(upgrades[upgrade].cost)} clicks`;
     document.getElementById(upgrade + '-cps').textContent = `+${upgrades[upgrade].cps} CPS`;
@@ -460,23 +631,31 @@ document.getElementById('rebirth-button').textContent = `Rebirth ${formatNumber(
     }
 
     function buyUpgrade(upgrade) {
-      if (count >= upgrades[upgrade].cost && !upgrades[upgrade].purchased) {
+      if (count >= upgrades[upgrade].cost) {
         count -= upgrades[upgrade].cost;
         cps += upgrades[upgrade].cps;
         cpc += upgrades[upgrade].cpc;
+        firstUpgrade = true;
         counter.textContent = count;
+        upgrades[upgrade].purchases++;
         updateCpsDisplay(); // Update the CPS display
         // Increase the cost for the next purchase
         upgrades[upgrade].cost *= 1.5; // Increase cost by 50%
         upgrades[upgrade].cost = Math.ceil(upgrades[upgrade].cost); // Round up to the nearest whole number
-        document.getElementById(upgrade + '-price').textContent = `Price: ${upgrades[upgrade].cost} clicks`;
-        swal('Purchase Successful', 'You have bought the item!', 'success');
-
+        document.getElementById(upgrade + '-price').textContent = `Price: ${upgrades[upgrade].cost} clicks`
+        updateDisplay();
+        swal('Purchase Successful', `You have bought ${upgrades[upgrade].purchases} ${upgrade}!`, 'success')
       } else {
         swal('Purchase Unsuccessful', 'You do not have enough clicks to buy this item.', 'error');
 
       }
     }
+
+    function updateDisplay() {
+  for (let key in upgrades) {
+    document.getElementById(`${key}-purchases`).textContent = `Purchased: ${upgrades[key].purchases}`;
+  }
+}
 
     setInterval(function() {
       count += cps;
@@ -608,6 +787,159 @@ window.onload = loadGame;
 // Save the game every 5 seconds
 setInterval(saveGame, 5000);
 
+function updateShopDisplay() {
+  for (let key in upgrades) {
+    const upgrade = upgrades[key];
+    const priceElement = document.getElementById(`${key}-price`);
+    const cpsElement = document.getElementById(`${key}-cps`);
+    const cpcElement = document.getElementById(`${key}-cpc`);
+
+    if (count >= upgrade.cost * 0.25) { // If player has 25% of the cost
+      upgrade.unlocked = true;
+    }
+
+    // Update the display based on whether the upgrade is unlocked
+    priceElement.textContent = upgrade.unlocked ? `Price: ${upgrade.cost} clicks` : 'Price: ???';
+    cpsElement.textContent = upgrade.unlocked ? `+${upgrade.cps} CPS` : '+??? CPS';
+    cpcElement.textContent = upgrade.unlocked ? `+${upgrade.cpc} CPC` : '+??? CPC';
+  }
+}
+
+window.onload = function() {
+setInterval(updateShopDisplay, 1000);
+};
+
+let newItemsUnlocked = false; // Flag to track if new items are unlocked
+
+// Function to check for new unlocked items
+function checkForNewUnlockedItems() {
+  newItemsUnlocked = Object.values(upgrades).some(upgrade => {
+    return count >= upgrade.cost * 0.25 && !upgrade.unlocked;
+  });
+  updateShopButtonIndicator();
+}
+
+// Function to update the shop button indicator
+function updateShopButtonIndicator() {
+  const shopButton = document.getElementById('shop-button');
+  if (newItemsUnlocked) {
+    shopButton.classList.add('new-items-indicator');
+  } else {
+    shopButton.classList.remove('new-items-indicator');
+  }
+}
+
+// Call this function regularly to check for new items
+setInterval(checkForNewUnlockedItems, 1000);
+
+
+// Example quest data structure
+const quests = [
+  { id: 1, title: "First Click!", description: "Click the cat for the first time.", completed: false },
+  { id: 2, title: "First Upgrade!", description: "Purchase your first upgrade.", completed: false },
+  { id: 3, title: "Click Frency!", description: "Get 100 Cats", completed: false },
+  { id: 4, title: "More?!", description: "Get 2 CPC", completed: false },
+  { id: 5, title: "Cats, More Cats!", description: "Get 5000 Cats", completed: false },
+  { id: 6, title: "Still More??", description: "Get 15000 Cats", completed: false },
+  { id: 7, title: "Are We Done?", description: "Get 1000 CPS", completed: false },
+  { id: 8, title: "Nope Not Yet!", description: "Get 2500 CPS", completed: false },
+  { id: 9, title: "What About Now?", description: "Get 18 CPC", completed: false }
+];
+
+// Function to initialize the side quest panel
+function initializeQuestPanel() {
+  quests.forEach(addQuestToPanel);
+}
+
+// Function to add quests to the side panel
+function addQuestToPanel(quest) {
+  const questList = document.getElementById('quest-list');
+  const questItem = document.createElement('li');
+  questItem.setAttribute('id', `quest-${quest.id}`);
+  questItem.textContent = quest.title;
+  questItem.onclick = function() {
+    showQuestDetails(quest);
+  };
+  questList.appendChild(questItem);
+}
+
+// Function to show quest details using SweetAlert
+function showQuestDetails(quest) {
+  swal({
+    title: quest.title,
+    text: quest.description,
+    icon: "info",
+    button: "Ok",
+  });
+}
+function completeQuest(questId) {
+  setTimeout(function() {
+    const quest = quests.find(q => q.id === questId);
+    if (quest && !quest.completed) {
+      quest.completed = true;
+      const questItem = document.getElementById(`quest-${questId}`);
+      if (questItem) {
+        questItem.classList.add('completed');
+        questItem.onclick = null; // Remove the click event listener if needed
+
+        // Show a SweetAlert to notify the player of quest completion
+      }
+    }
+  }, 1000); // Delay in milliseconds
+}
+
+// Function to mark a quest as completed and show a SweetAlert
+// Call this function when the game starts
+initializeQuestPanel();
+function checkQuests() {
+
+if (count >= 1) {
+completeQuest(1);
+};
+
+if (firstUpgrade) {
+completeQuest(2);
+};
+
+if (count >= 100) {
+completeQuest(3);  
+}
+
+if (cpc >= 2) {
+completeQuest(4);  
+}
+
+if (count >= 5000) {
+completeQuest(5);  
+}
+
+if (count >= 15000) {
+completeQuest(6);  
+}
+
+if (cps >= 1000) {
+completeQuest(7);  
+}
+
+if (cps >= 2500) {
+completeQuest(8);
+}
+
+if (cpc >= 18) {
+completeQuest(9);  
+}
+};
+
+setInterval(checkQuests, 1000);
+
+// Disable dragstart and drop events on the entire document body
+document.body.addEventListener('dragstart', event => {
+  event.preventDefault();
+});
+
+document.body.addEventListener('drop', event => {
+  event.preventDefault();
+});
 
   </script>
 </body>
