@@ -87,6 +87,7 @@
    position: fixed !important;
    left: 550px;
    width: 450px;
+   transform: translateY(-95px); 
   }
   #rebirth-button {
    background-color: #4CAF50;
@@ -98,6 +99,7 @@
    font-size: 1.2em;
    bottom: 5px;
    position: fixed;
+   transform: translateY(-20px); 
   }
  
  
@@ -113,7 +115,6 @@
    display: none;
    position: fixed;
    left: 50%;
-   top: 50%;
    transform: translate(-50%, -50%);
    background-color: white;
    border: 2px solid #555;
@@ -316,6 +317,7 @@
     text-align: center;
     padding: 20px 0;
     font-family: 'Arial', sans-serif;
+    bottom: 0px;
   }
   .footer a {
     color: #f8f8f8;
@@ -332,6 +334,34 @@
     font-size: 1.5em;
     font-weight: bold;
   }
+  html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Use the viewport height to ensure full coverage */
+}
+
+.content {
+  flex: 1; /* This will make the content expand to fill available space */
+}
+
+.footer {
+  flex-shrink: 0; /* Prevents the footer from shrinking */
+}
+.footer {
+  width: 100vw; /* This will make the footer stretch across the full width of the viewport */
+  box-sizing: border-box; /* This ensures that padding and borders are included in the width */
+}
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+ 
 </style>
 </head>
 <body>
@@ -339,193 +369,195 @@
     <source src="Music.mp3" type="audio/mp3">
     Your browser does not support the audio element.
   </audio>
-  
+  <div class="content">
     <div style="text-align: center;">
-  <div id="counter">Cats: 0</div>
-  <div id="cpsc-counter">CPS: 0 CPC: 1</div>
-</div>
-<img id="cat" src="Cat.png" alt="Cute cat" draggable="false">
-
-  <button id="rebirth-button">Rebirth</button>
-  <button id="shop-button">Open Shop</button>
-  <div id="shop">
-    <button id="close-shop">X</button>
-    <div id="whiskerWidgets" class="shop-item">
-      <h3>Whisker Widgets</h3>
-      <p id="whiskerWidgets-price">Price: ???</p>
-      <p id="whiskerWidgets-cps">+??? CPS</p>
-      <p id="whiskerWidgets-cpc">+??? CPC</p>
-      <p id="whiskerWidgets-purchases">Purchased: 0</p>
-      <button onclick="buyUpgrade('whiskerWidgets')">Buy</button>
+      <div id="counter">Cats: 0</div>
+      <div id="cpsc-counter">CPS: 0 CPC: 1</div>
     </div>
-    <div id="purrfectProcessor" class="shop-item">
-      <h3>Purrfect Processor</h3>
-      <p id="purrfectProcessor-price">Price: ???</p>
-      <p id="purrfectProcessor-cps">+??? CPS</p>
-      <p id="purrfectProcessor-cpc">+??? CPC</p>
-      <p id="purrfectProcessor-purchases">Purchased: 0</p>
-      <button onclick="buyUpgrade('purrfectProcessor')">Buy</button>
-    </div>
-    <div id="clawCapacitor" class="shop-item">
-      <h3>Claw Capacitor</h3>
-      <p id="clawCapacitor-price">Price: ???</p>
-      <p id="clawCapacitor-cps">+??? CPS</p>
-      <p id="clawCapacitor-cpc">+??? CPC</p>
-      <p id="clawCapacitor-purchases">Purchased: 0</p>
-      <button onclick="buyUpgrade('clawCapacitor')">Buy</button>
-    </div>
-    <div id="furballFusionCore" class="shop-item">
-      <h3>Furball Fusion Core</h3>
-      <p id="furballFusionCore-price">Price: ???</p>
-      <p id="furballFusionCore-cps">+??? CPS</p>
-      <p id="furballFusionCore-cpc">+??? CPC</p>
-      <p id="furballFusionCore-purchases">Purchased: 0</p>
-      <button onclick="buyUpgrade('furballFusionCore')">Buy</button>
-    </div>
-    <div id="meowMixer" class="shop-item">
-      <h3>Meow Mixer</h3>
-      <p id="meowMixer-price">Price: ???</p>
-      <p id="meowMixer-cps">+??? CPS</p>
-      <p id="meowMixer-cpc">+??? CPC</p>
-      <p id="meowMixer-purchases">Purchased: 0</p>
-      <button onclick="buyUpgrade('meowMixer')">Buy</button>
-    </div>
-    <div id="kittyCollider" class="shop-item">
-      <h3>Kitty Collider</h3>
-      <p id="kittyCollider-price">Price: ???</p>
-      <p id="kittyCollider-cps">+??? CPS</p>
-      <p id="kittyCollider-cpc">+??? CPC</p>
-      <p id="kittyCollider-purchases">Purchased: 0</p>
-      <button onclick="buyUpgrade('kittyCollider')">Buy</button>
-      <div id="tailTuner" class="shop-item">
-        <h3>Tail Tuner</h3>
-        <p id="tailTuner-price">Price: ???</p>
-        <p id="tailTuner-cps">+??? CPS</p>
-        <p id="tailTuner-cpc">+??? CPC</p>
-        <p id="tailTuner-purchases">Purchased: 0</p>
-        <button onclick="buyUpgrade('tailTuner')">Buy</button>
-      </div>
-      <div id="whiskerWarpDrive" class="shop-item">
-        <h3>Whisker Warp Drive</h3>
-        <p id="whiskerWarpDrive-price">Price: ???</p>
-        <p id="whiskerWarpDrive-cps">+??? CPS</p>
-        <p id="whiskerWarpDrive-cpc">+??? CPC</p>
-        <p id="whiskerWarpDrive-purchases">Purchased: 0</p>
-        <button onclick="buyUpgrade('whiskerWarpDrive')">Buy</button>
-        <div id="felineFlicker" class="shop-item">
-            <h3>Feline Flicker</h3>
-            <p id="felineFlicker-price">Price: ???</p>
-            <p id="felineFlicker-cps">+??? CPS</p>
-            <p id="felineFlicker-cpc">+??? CPC</p>
-            <p id="felineFlicker-purchases">Purchased: 0</p>
-            <button onclick="buyUpgrade('felineFlicker')">Buy</button>
+    <img id="cat" src="Cat.png" alt="Cute cat" draggable="false">
+    
+      <button id="rebirth-button">Rebirth</button>
+      <button id="shop-button">Open Shop</button>
+      <div id="shop">
+        <button id="close-shop">X</button>
+        <div id="whiskerWidgets" class="shop-item">
+          <h3>Whisker Widgets</h3>
+          <p id="whiskerWidgets-price">Price: ???</p>
+          <p id="whiskerWidgets-cps">+??? CPS</p>
+          <p id="whiskerWidgets-cpc">+??? CPC</p>
+          <p id="whiskerWidgets-purchases">Purchased: 0</p>
+          <button onclick="buyUpgrade('whiskerWidgets')">Buy</button>
+        </div>
+        <div id="purrfectProcessor" class="shop-item">
+          <h3>Purrfect Processor</h3>
+          <p id="purrfectProcessor-price">Price: ???</p>
+          <p id="purrfectProcessor-cps">+??? CPS</p>
+          <p id="purrfectProcessor-cpc">+??? CPC</p>
+          <p id="purrfectProcessor-purchases">Purchased: 0</p>
+          <button onclick="buyUpgrade('purrfectProcessor')">Buy</button>
+        </div>
+        <div id="clawCapacitor" class="shop-item">
+          <h3>Claw Capacitor</h3>
+          <p id="clawCapacitor-price">Price: ???</p>
+          <p id="clawCapacitor-cps">+??? CPS</p>
+          <p id="clawCapacitor-cpc">+??? CPC</p>
+          <p id="clawCapacitor-purchases">Purchased: 0</p>
+          <button onclick="buyUpgrade('clawCapacitor')">Buy</button>
+        </div>
+        <div id="furballFusionCore" class="shop-item">
+          <h3>Furball Fusion Core</h3>
+          <p id="furballFusionCore-price">Price: ???</p>
+          <p id="furballFusionCore-cps">+??? CPS</p>
+          <p id="furballFusionCore-cpc">+??? CPC</p>
+          <p id="furballFusionCore-purchases">Purchased: 0</p>
+          <button onclick="buyUpgrade('furballFusionCore')">Buy</button>
+        </div>
+        <div id="meowMixer" class="shop-item">
+          <h3>Meow Mixer</h3>
+          <p id="meowMixer-price">Price: ???</p>
+          <p id="meowMixer-cps">+??? CPS</p>
+          <p id="meowMixer-cpc">+??? CPC</p>
+          <p id="meowMixer-purchases">Purchased: 0</p>
+          <button onclick="buyUpgrade('meowMixer')">Buy</button>
+        </div>
+        <div id="kittyCollider" class="shop-item">
+          <h3>Kitty Collider</h3>
+          <p id="kittyCollider-price">Price: ???</p>
+          <p id="kittyCollider-cps">+??? CPS</p>
+          <p id="kittyCollider-cpc">+??? CPC</p>
+          <p id="kittyCollider-purchases">Purchased: 0</p>
+          <button onclick="buyUpgrade('kittyCollider')">Buy</button>
+          <div id="tailTuner" class="shop-item">
+            <h3>Tail Tuner</h3>
+            <p id="tailTuner-price">Price: ???</p>
+            <p id="tailTuner-cps">+??? CPS</p>
+            <p id="tailTuner-cpc">+??? CPC</p>
+            <p id="tailTuner-purchases">Purchased: 0</p>
+            <button onclick="buyUpgrade('tailTuner')">Buy</button>
           </div>
-          <div id="purringPowerPlant" class="shop-item">
-            <h3>Purring Power Plant</h3>
-            <p id="purringPowerPlant-price">Price: ???</p>
-            <p id="purringPowerPlant-cps">+??? CPS</p>
-            <p id="purringPowerPlant-cpc">+??? CPC</p>
-            <p id="purringPowerPlant-purchases">Purchased: 0</p>
-            <button onclick="buyUpgrade('purringPowerPlant')">Buy</button>
-          </div>
-          <div id="catnipConverter" class="shop-item">
-            <h3>Catnip Converter</h3>
-            <p id="catnipConverter-price">Price: ???</p>
-            <p id="catnipConverter-cps">+??? CPS</p>
-            <p id="catnipConverter-cpc">+??? CPC</p>
-            <p id="catnipConverter-purchases">Purchased: 0</p>
-            <button onclick="buyUpgrade('catnipConverter')">Buy</button>
-          </div>
-          <div id="kittyKraken" class="shop-item">
-            <h3>Kitty Kraken</h3>
-            <p id="kittyKraken-price">Price: ???</p>
-            <p id="kittyKraken-cps">+??? CPS</p>
-            <p id="kittyKraken-cpc">+??? CPC</p>
-            <p id="kittyKraken-purchases">Purchased: 0</p>
-            <button onclick="buyUpgrade('kittyKraken')">Buy</button>
-          </div>
-          <div id="meowtoniumReactor" class="shop-item">
-            <h3>Meowtonium Reactor</h3>
-            <p id="meowtoniumReactor-price">Price: ???</p>
-            <p id="meowtoniumReactor-cps">+??? CPS</p>
-            <p id="meowtoniumReactor-cpc">+??? CPC</p>
-            <p id="meowtoniumReactor-purchases">Purchased: 0</p>
-            <button onclick="buyUpgrade('meowtoniumReactor')">Buy</button>
-          </div>
-          <div id="quantumPurr" class="shop-item">
-            <h3>Quantum Purr</h3>
-            <p id="quantumPurr-price">Price: ???</p>
-            <p id="quantumPurr-cps">+??? CPS</p>
-            <p id="quantumPurr-cpc">+??? CPC</p>
-            <p id="quantumPurr-purchases">Purchased: 0</p>
-            <button onclick="buyUpgrade('quantumPurr')">Buy</button>
-            <div id="cosmicClaws" class="shop-item">
-                <h3>Cosmic Claws</h3>
-                <p id="cosmicClaws-price">Price: ???</p>
-                <p id="cosmicClaws-cps">+??? CPS</p>
-                <p id="cosmicClaws-cpc">+??? CPC</p>
-                <p id="cosmicClaws-purchases">Purchased: 0</p>
-                <button onclick="buyUpgrade('cosmicClaws')">Buy</button>
+          <div id="whiskerWarpDrive" class="shop-item">
+            <h3>Whisker Warp Drive</h3>
+            <p id="whiskerWarpDrive-price">Price: ???</p>
+            <p id="whiskerWarpDrive-cps">+??? CPS</p>
+            <p id="whiskerWarpDrive-cpc">+??? CPC</p>
+            <p id="whiskerWarpDrive-purchases">Purchased: 0</p>
+            <button onclick="buyUpgrade('whiskerWarpDrive')">Buy</button>
+            <div id="felineFlicker" class="shop-item">
+                <h3>Feline Flicker</h3>
+                <p id="felineFlicker-price">Price: ???</p>
+                <p id="felineFlicker-cps">+??? CPS</p>
+                <p id="felineFlicker-cpc">+??? CPC</p>
+                <p id="felineFlicker-purchases">Purchased: 0</p>
+                <button onclick="buyUpgrade('felineFlicker')">Buy</button>
               </div>
-              <div id="nebulaNip" class="shop-item">
-                <h3>Nebula Nip</h3>
-                <p id="nebulaNip-price">Price: ???</p>
-                <p id="nebulaNip-cps">+??? CPS</p>
-                <p id="nebulaNip-cpc">+??? CPC</p>
-                <p id="nebulaNip-purchases">Purchased: 0</p>
-                <button onclick="buyUpgrade('nebulaNip')">Buy</button>
+              <div id="purringPowerPlant" class="shop-item">
+                <h3>Purring Power Plant</h3>
+                <p id="purringPowerPlant-price">Price: ???</p>
+                <p id="purringPowerPlant-cps">+??? CPS</p>
+                <p id="purringPowerPlant-cpc">+??? CPC</p>
+                <p id="purringPowerPlant-purchases">Purchased: 0</p>
+                <button onclick="buyUpgrade('purringPowerPlant')">Buy</button>
               </div>
-              <div id="galacticGroomer" class="shop-item">
-                <h3>Galactic Groomer</h3>
-                <p id="galacticGroomer-price">Price: ???</p>
-                <p id="galacticGroomer-cps">+??? CPS</p>
-                <p id="galacticGroomer-cpc">+??? CPC</p>
-                <p id="galacticGroomer-purchases">Purchased: 0</p>
-                <button onclick="buyUpgrade('galacticGroomer')">Buy</button>
+              <div id="catnipConverter" class="shop-item">
+                <h3>Catnip Converter</h3>
+                <p id="catnipConverter-price">Price: ???</p>
+                <p id="catnipConverter-cps">+??? CPS</p>
+                <p id="catnipConverter-cpc">+??? CPC</p>
+                <p id="catnipConverter-purchases">Purchased: 0</p>
+                <button onclick="buyUpgrade('catnipConverter')">Buy</button>
               </div>
-              <div id="starlightScratcher" class="shop-item">
-                <h3>Starlight Scratcher</h3>
-                <p id="starlightScratcher-price">Price: ???</p>
-                <p id="starlightScratcher-cps">+??? CPS</p>
-                <p id="starlightScratcher-cpc">+??? CPC</p>  
-                <p id="starlightScratcher-purchases">Purchased: 0</p>
-                <button onclick="buyUpgrade('starlightScratcher')">Buy</button>
+              <div id="kittyKraken" class="shop-item">
+                <h3>Kitty Kraken</h3>
+                <p id="kittyKraken-price">Price: ???</p>
+                <p id="kittyKraken-cps">+??? CPS</p>
+                <p id="kittyKraken-cpc">+??? CPC</p>
+                <p id="kittyKraken-purchases">Purchased: 0</p>
+                <button onclick="buyUpgrade('kittyKraken')">Buy</button>
               </div>
-              <div id="cometCuddler" class="shop-item">
-                <h3>Comet Cuddler</h3>
-                <p id="cometCuddler-price">Price: ???</p>
-                <p id="cometCuddler-cps">+??? CPS</p>
-                <p id="cometCuddler-cpc">+??? CPC</p>
-                <p id="cometCuddler-purchases">Purchased: 0</p>
-                <button onclick="buyUpgrade('cometCuddler')">Buy</button>
+              <div id="meowtoniumReactor" class="shop-item">
+                <h3>Meowtonium Reactor</h3>
+                <p id="meowtoniumReactor-price">Price: ???</p>
+                <p id="meowtoniumReactor-cps">+??? CPS</p>
+                <p id="meowtoniumReactor-cpc">+??? CPC</p>
+                <p id="meowtoniumReactor-purchases">Purchased: 0</p>
+                <button onclick="buyUpgrade('meowtoniumReactor')">Buy</button>
               </div>
-              <div id="universalPurr" class="shop-item">
-                <h3>Universal Purr</h3>
-                <p id="universalPurr-price">Price: ???</p>
-                <p id="universalPurr-cps">+??? CPS</p>
-                <p id="universalPurr-cpc">+??? CPC</p>
-                <p id="universalPurr-purchases">Purchased: 0</p>
-                <button onclick="buyUpgrade('universalPurr')">Buy</button>
+              <div id="quantumPurr" class="shop-item">
+                <h3>Quantum Purr</h3>
+                <p id="quantumPurr-price">Price: ???</p>
+                <p id="quantumPurr-cps">+??? CPS</p>
+                <p id="quantumPurr-cpc">+??? CPC</p>
+                <p id="quantumPurr-purchases">Purchased: 0</p>
+                <button onclick="buyUpgrade('quantumPurr')">Buy</button>
+                <div id="cosmicClaws" class="shop-item">
+                    <h3>Cosmic Claws</h3>
+                    <p id="cosmicClaws-price">Price: ???</p>
+                    <p id="cosmicClaws-cps">+??? CPS</p>
+                    <p id="cosmicClaws-cpc">+??? CPC</p>
+                    <p id="cosmicClaws-purchases">Purchased: 0</p>
+                    <button onclick="buyUpgrade('cosmicClaws')">Buy</button>
+                  </div>
+                  <div id="nebulaNip" class="shop-item">
+                    <h3>Nebula Nip</h3>
+                    <p id="nebulaNip-price">Price: ???</p>
+                    <p id="nebulaNip-cps">+??? CPS</p>
+                    <p id="nebulaNip-cpc">+??? CPC</p>
+                    <p id="nebulaNip-purchases">Purchased: 0</p>
+                    <button onclick="buyUpgrade('nebulaNip')">Buy</button>
+                  </div>
+                  <div id="galacticGroomer" class="shop-item">
+                    <h3>Galactic Groomer</h3>
+                    <p id="galacticGroomer-price">Price: ???</p>
+                    <p id="galacticGroomer-cps">+??? CPS</p>
+                    <p id="galacticGroomer-cpc">+??? CPC</p>
+                    <p id="galacticGroomer-purchases">Purchased: 0</p>
+                    <button onclick="buyUpgrade('galacticGroomer')">Buy</button>
+                  </div>
+                  <div id="starlightScratcher" class="shop-item">
+                    <h3>Starlight Scratcher</h3>
+                    <p id="starlightScratcher-price">Price: ???</p>
+                    <p id="starlightScratcher-cps">+??? CPS</p>
+                    <p id="starlightScratcher-cpc">+??? CPC</p>  
+                    <p id="starlightScratcher-purchases">Purchased: 0</p>
+                    <button onclick="buyUpgrade('starlightScratcher')">Buy</button>
+                  </div>
+                  <div id="cometCuddler" class="shop-item">
+                    <h3>Comet Cuddler</h3>
+                    <p id="cometCuddler-price">Price: ???</p>
+                    <p id="cometCuddler-cps">+??? CPS</p>
+                    <p id="cometCuddler-cpc">+??? CPC</p>
+                    <p id="cometCuddler-purchases">Purchased: 0</p>
+                    <button onclick="buyUpgrade('cometCuddler')">Buy</button>
+                  </div>
+                  <div id="universalPurr" class="shop-item">
+                    <h3>Universal Purr</h3>
+                    <p id="universalPurr-price">Price: ???</p>
+                    <p id="universalPurr-cps">+??? CPS</p>
+                    <p id="universalPurr-cpc">+??? CPC</p>
+                    <p id="universalPurr-purchases">Purchased: 0</p>
+                    <button onclick="buyUpgrade('universalPurr')">Buy</button>
+                  </div>
+                  
               </div>
               
           </div>
-          
+        </div>
       </div>
-    </div>
+      </div>
+    
+      <!-- Side Quest Panel HTML -->
+    <div id="side-quest-panel">
+      <h3>Side Quests</h3>
+      <ul id="quest-list">
+        <!-- Quest items will be added here dynamically -->
+      </ul>
+    </div> 
   </div>
-  </div>
-
-  <!-- Side Quest Panel HTML -->
-<div id="side-quest-panel">
-  <h3>Side Quests</h3>
-  <ul id="quest-list">
-    <!-- Quest items will be added here dynamically -->
-  </ul>
-</div>
+   
 
 <div class="footer">
-  <div class="form8tory">form8tory</div>
-  <p>© 2024 form8tory. All rights reserved.</p>
+  <div class="form8tory">Form8tory</div>
+  <p>© 2024 Form8tory. All rights reserved.</p>
 </div>
 <script>
  document.getElementById('cat').ondragstart = function() { return false; };
